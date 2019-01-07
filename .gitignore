@@ -30,3 +30,7 @@ test/bin/
 
 # Cache
 *.swp
+
+
+.vscode/*
+.idea/*

@@ -104,6 +104,7 @@ func (svr *Service) Run() error {
 	return nil
 }
 
+// 猜测是连接保活
 func (svr *Service) keepControllerWorking() {
 	maxDelayTime := 20 * time.Second
 	delayTime := time.Second
@@ -143,6 +144,7 @@ func (svr *Service) keepControllerWorking() {
 // conn: control connection
 // session: if it's not nil, using tcp mux
 func (svr *Service) login() (conn frpNet.Conn, session *fmux.Session, err error) {
+	// 通过本地代理来连接公网服务器
 	conn, err = frpNet.ConnectServerByProxy(g.GlbClientCfg.HttpProxy, g.GlbClientCfg.Protocol,
 		fmt.Sprintf("%s:%d", g.GlbClientCfg.ServerAddr, g.GlbClientCfg.ServerPort))
 	if err != nil {
